@@ -12,7 +12,7 @@ char gen_random_char() {
     // 'Buffer' for single random int
     int random_number;
     // Generate a random number (Linux specific?)
-    getrandom(&random_number, 1, GRND_RANDOM);
+    getrandom(&random_number, sizeof(char), GRND_RANDOM);
 
     // Constrain random_number to bounds (inclusive)
     random_number = (random_number % (UPPER_BOUND - LOWER_BOUND)) + LOWER_BOUND;
@@ -20,9 +20,13 @@ char gen_random_char() {
     return (char)random_number;
 }
 
-// TODO: fix inconsistency with file-name and function-name
 // Might want to eventually account for some errors with a return enum
-void gen_string(char buffer[], size_t GEN_LENGTH) {
+void gen_string(char *buffer, size_t GEN_LENGTH) {
+
+    // Return if we should not generate anything
+    // Otherwise, SEGFAULTs happen!!
+    if (GEN_LENGTH == 0) { return; }
+
     // Generate the contents of the string
    for (size_t i = 0; i < GEN_LENGTH - 1; i++) {
        buffer[i] = gen_random_char();

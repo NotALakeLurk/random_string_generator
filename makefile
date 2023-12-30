@@ -1,6 +1,12 @@
+# STANDARD VARIABLES
 CFLAGS = -Wall -Wextra
 CC = gcc
 VPATH = src:build
+
+# CUSTOM VARIABLES
+
+# Debugger
+DBG = gdb
 
 # MAKE STUFF? 
 
@@ -24,5 +30,12 @@ clean:
 	
 # Compile (maybe not always?) and run the app
 .PHONY = run
-run: clean build/bin/random_string_generator
+run: build/bin/random_string_generator
 	./build/bin/random_string_generator
+
+# Compile with debug stuffs
+.PHONY = debug
+debug: CFLAGS += -g3
+debug: RUN = gdb
+debug: clean build/bin/random_string_generator
+	$(DBG) build/bin/random_string_generator
