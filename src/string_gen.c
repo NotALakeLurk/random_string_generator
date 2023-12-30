@@ -20,6 +20,7 @@ char gen_random_char() {
     return (char)random_number;
 }
 
+// TODO: fix inconsistency with file-name and function-name
 // Might want to eventually account for some errors with a return enum
 void gen_string(char buffer[], size_t GEN_LENGTH) {
     // Generate the contents of the string

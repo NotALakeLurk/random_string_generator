@@ -3,6 +3,8 @@
 
 #include <stddef.h>
 
+// As a sidenote: I love Rust
+
 /// Takes an input length and generates a null-terminated string
 ///     that has the same length (usable characters will be one less than input)
 ///
